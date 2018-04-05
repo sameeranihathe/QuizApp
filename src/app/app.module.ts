@@ -8,6 +8,7 @@ import { QuizComponent } from './quiz/quiz.component';
 import { ResultComponent } from './result/result.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
+import { FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { appRoutes } from './routes';
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
