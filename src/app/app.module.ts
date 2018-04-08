@@ -9,7 +9,8 @@ import { ResultComponent } from './result/result.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { FormsModule} from '@angular/forms';
-
+import { HttpClientModule} from '@angular/common/http';
+import { QuizService } from './shared/quiz.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,9 +22,10 @@ import { FormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [QuizService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
