@@ -13,7 +13,7 @@ export class QuizComponent implements OnInit {
 
   ngOnInit() {
     this.quizService.seconds = 0;
-    this.quizService.qnProgree = 0;
+    this.quizService.qnProgress = 0;
 
     this.quizService.getQuestions().subscribe(
       (data:any)=>{

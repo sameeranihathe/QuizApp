@@ -3,28 +3,49 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class QuizService {
-//--------------properties----------------
-  readonly rootUrl = 'http://localhost:51438/';
-  qns : any[];
+  //---------------- Properties---------------
+  readonly rootUrl = 'http://localhost:51438';
+  qns: any[];
   seconds: number;
   timer;
-  qnProgree: number;
+  qnProgress: number;
+  correctAnswerCount: number = 0;
 
-
-
-//-----------helper methods---------------
-
+  //---------------- Helper Methods---------------
   constructor(private http: HttpClient) { }
-//---------http methods---------------
-  insertParticipant(name : string, email: string){
-    var body ={
-    Name: name,
-    Email: email
+  displayTimeElapsed() {
+    return Math.floor(this.seconds / 3600) + ':' + Math.floor(this.seconds / 60) + ':' + Math.floor(this.seconds % 60);
+  }
+
+  getParticipantName() {
+    var participant = JSON.parse(localStorage.getItem('participant'));
+    return participant.Name;
+  }
+
+
+  //---------------- Http Methods---------------
+  insertParticipant(name: string, email: string) {
+    var body = {
+      Name: name,
+      Email: email
     }
     return this.http.post(this.rootUrl + '/api/InsertParticipant', body);
   }
 
-  getQuestions(){
+  getQuestions() {
     return this.http.get(this.rootUrl + '/api/Questions');
   }
+
+  getAnswers() {
+    var body = this.qns.map(x => x.QnID);
+    return this.http.post(this.rootUrl + '/api/Answers', body);
+  }
+
+  submitScore() {
+    var body = JSON.parse(localStorage.getItem('participant'));
+    body.Score = this.correctAnswerCount;
+    body.TimeSpent = this.seconds;
+    return this.http.post(this.rootUrl + "/api/UpdateOutput", body);
+  }
+
 }
