@@ -11,6 +11,8 @@ import { appRoutes } from './routes';
 import { FormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { QuizService } from './shared/quiz.service';
+import {AuthGuard} from './auth/auth.guard';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,7 @@ import { QuizService } from './shared/quiz.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [QuizService],
+  providers: [QuizService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
