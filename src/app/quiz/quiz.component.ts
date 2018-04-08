@@ -31,5 +31,11 @@ export class QuizComponent implements OnInit {
     }, 1000);
   }
 
+  Answer(qID, choice){
+    
+  }
+
+  
+
 
 }
